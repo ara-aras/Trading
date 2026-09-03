@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { CycleRecord } from "@/lib/audit";
+import { INCEPTION_EQUITY } from "@/lib/summary";
 
 // Single series (equity), sequential blue hue, per the dataviz skill's validated
 // reference palette — see BRAINSTORM.md / the skill's references/palette.md.
@@ -115,10 +116,14 @@ export function EquityChart({ records }: { records: CycleRecord[] }) {
 
   const path = points.map((p, i) => `${i === 0 ? "M" : "L"}${x(i)},${y(p.equity)}`).join(" ");
 
-  const first = points[0].equity;
   const last = points[points.length - 1].equity;
-  const delta = last - first;
-  const deltaPct = first !== 0 ? (delta / first) * 100 : 0;
+  // Anchor the delta to the account's opening balance, NOT to the first logged equity.
+  // account_equity was added to the record part-way through the run, so points[0] is
+  // $100,007.79 - an artifact of when logging started, not of what the account opened at.
+  // The summary panel anchors to INCEPTION_EQUITY; a different base here put two figures
+  // on one page that disagreed in the second decimal (-3.21% vs -3.22%).
+  const delta = last - INCEPTION_EQUITY;
+  const deltaPct = (delta / INCEPTION_EQUITY) * 100;
   const isUp = delta >= 0;
 
   const active = hover !== null ? points[hover] : points[points.length - 1];
@@ -160,7 +165,8 @@ export function EquityChart({ records }: { records: CycleRecord[] }) {
             {deltaPct.toFixed(2)}%)
           </div>
           <div className="font-mono text-[10px] text-[var(--muted)]">
-            {points.length} point{points.length === 1 ? "" : "s"}
+            since ${money(INCEPTION_EQUITY)} open · {points.length} point
+            {points.length === 1 ? "" : "s"}
             {isFlat ? " · unchanged" : ""}
           </div>
         </div>

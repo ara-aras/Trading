@@ -184,6 +184,11 @@ Stated here rather than left to be found. Detail in
   base rate is 0.40–0.49 by underlying, while the rulebook's thresholds assume 0.50 is neutral.
   Every trade this system has made was bearish or neutral **by construction, not by view**.
   Found by instrumenting our own system, and deliberately not patched mid-competition.
+- **When the live model's API fails, the rulebook fires with no model in the loop.** Groq
+  returned `json_validate_failed` on 7 of 203 cycles; each of those executed the rulebook's
+  mandate directly, labelled in the record as `DETERMINISTIC FALLBACK - no model reached`.
+  "It can never propose a trade the rules don't" still holds. "It may decline one the rules
+  mandate" does not hold in those cycles - there was nothing there to decline.
 - **IV rank is untrusted for part of the universe** — the trust gate needs 30 samples across
   ≥2 calendar days, and IWM and DIA have never satisfied it.
 - **A daily model is queried every 15 minutes**, so intraday its output is near-constant.

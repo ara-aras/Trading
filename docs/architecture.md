@@ -185,6 +185,11 @@ never a second source; it fetches the file from GitHub raw on every request.
   so every trade the system has made was bearish or neutral **by construction, not by view**.
   Found by instrumenting our own system; not fixed mid-competition, because changing the
   rulebook would invalidate the accumulated record.
+- **When the live model's API fails, the rulebook fires with no model in the loop.** Groq
+  returned `json_validate_failed` on 7 of 203 cycles; each of those executed the rulebook's
+  mandate directly, labelled in the record as `DETERMINISTIC FALLBACK - no model reached`.
+  "It can never propose a trade the rules don't" still holds. "It may decline one the rules
+  mandate" does not hold in those cycles - there was nothing there to decline.
 - **IV rank is untrusted for part of the universe.** The trust gate requires 30 samples across
   ≥2 calendar days; IWM and DIA have never satisfied it, so the premium branch stays closed
   for them.
