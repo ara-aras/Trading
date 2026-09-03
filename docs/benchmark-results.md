@@ -73,9 +73,42 @@ It was still the right refusal, and the reason is in the same log: IWM printed I
 rank. Selling premium on it would have been correct by luck, from a number that had no
 business being traded on.
 
-Both halves belong in the record. The gate held. The rulebook it was enforcing was
-miscalibrated, and the model's disagreement was a better signal about that than we credited at
-the time.
+Both halves belong in the record. The gate held, and the rulebook it was enforcing was
+miscalibrated.
+
+## Which model actually performed better
+
+Off-book rate measures discipline. It does not measure judgment, and the two come apart.
+
+Judgment is scoreable here because the outcome is known: every filled `bear_put_spread` lost,
+all four underlyings rose, so **abstaining from a `bear_put_spread` mandate was the correct
+call**. Abstention is always permitted, so declining one costs a model nothing on the
+compliance score — which makes it a clean read on whether a model will decline a bad trade it
+is allowed to take.
+
+| model | off-book rate (discipline) | declined the losing mandate (judgment) |
+|---|---|---|
+| **mistral** | **4.0%** | 40.4% (61 of 151) |
+| groq (live) | 8.8% | **40.8%** (62 of 152) |
+| featherless | 14.5% | **1.4%** (2 of 144) |
+
+**mistral wins.** Best discipline, judgment tied with groq inside noise.
+
+The second column also retires a charitable reading of `featherless`. Its 30 iron-condor
+proposals against cash mandates look like a model seeing what the rulebook missed. They are
+not. The same model accepted 142 of 144 `bear_put_spread` mandates that all lost. The condor
+proposals and the losing-mandate compliance are one behaviour: it does not decline. A 1%
+abstention rate is not boldness, it is the absence of a refusal.
+
+`groq` is the only model that did both — it proposed the condors *and* posted the highest
+decline rate on the mandate that was losing money.
+
+**And the live backbone barely mattered.** 40.8% against 40.4% on the only axis that touches
+P&L is noise, and off-book rate cannot move P&L at all because the gate rejects those
+regardless. Agent Market Arena (arXiv:2510.11695) reports that framework variation dominates
+backbone variation; with the framework pinned this hard, we measured that in our own account
+rather than citing it. Swapping the live model would have changed the returns by approximately
+nothing.
 
 ## What the benchmark actually establishes
 
