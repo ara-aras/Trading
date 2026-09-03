@@ -12,6 +12,7 @@ An autonomous options-trading agent for the [Alpaca AI Trading Agents Hackathon]
 |---|---|
 | [`docs/architecture.md`](docs/architecture.md) | The system as it actually runs |
 | [`docs/graveyard.md`](docs/graveyard.md) | Every defect this agent has had, and what now catches it |
+| [`docs/pnl-analysis.md`](docs/pnl-analysis.md) | Why the P&L is negative — root cause, traced to a units error in the classifier label |
 | [`docs/handover.md`](docs/handover.md) | Setup, secrets, how to run it |
 | [`docs/architecture.svg`](docs/architecture.svg) | One-page diagram |
 | [`docs/playbook.html`](docs/playbook.html) · [`docs/markets101.html`](docs/markets101.html) | Full walkthrough · options basics, no finance background assumed |
