@@ -478,3 +478,74 @@ reason at the bottom. That single card is the entire thesis in one image: same i
 different answers, one gate, a refusal with a reason attached.
 
 Take it at desktop width. Do not crop the reasoning text — the length is the point.
+
+---
+
+## Day 9 — Sep 4 · The submission post
+
+The closing post. It goes out with the submission, so it is the one a judge is most likely
+to open the repo from — which means every figure in it has to survive that click.
+
+All numbers below are from `logs/audit_log.jsonl` as of 2026-09-04, and the account is down.
+Do not soften that. Four days of build-in-public posts about what broke are worth nothing if
+the last one quietly rounds the result up.
+
+| Figure | Source |
+|---|---|
+| 258 logged cycles | line count of `logs/audit_log.jsonl` |
+| 62 abstentions | `live_rulebook.abstained` |
+| 228/258 rulebook-compliant | `live_rulebook.compliant` |
+| −5.5% on the paper account | 100,007.79 (Aug 30) → 94,534.26 (Sep 3) |
+| 3 models on identical signals | `guards.cross_model_agreement.shadow_picks` |
+
+### X (Rafan)
+
+```
+Submitted.
+
+258 logged cycles on a live Alpaca paper account. Finished down 5.5%.
+
+The audit log has all of them: 62 declines, 228 inside the rulebook, 3 models scored on identical signals.
+
+The drawdown is in the write-up, not buried.
+
+@lablabai @AlpacaHQ
+```
+
+### X — threaded reply (attach the video)
+
+```
+5 minutes on how it works, and what went wrong.
+
+A units error cost us most of the drawdown. We traced it, wrote it up, and left it in.
+
+Discretion to decline, not to substitute.
+```
+
+### LinkedIn (Prateek)
+
+```
+We submitted our options-trading agent to the lablab.ai x Alpaca AI Trading Agents Hackathon
+today, and it finished the week down 5.5% on a live paper account.
+
+I want to lead with that number, because the alternative is to lead with the 258 logged
+decision cycles and let the reader assume the rest.
+
+What the log actually shows: the agent declined to trade 62 times. It stayed inside its
+deterministic rulebook on 228 of 258 cycles. Three models saw identical signals every cycle
+and were scored against the same rules, and they disagreed with each other about as often as
+they agreed, which is the most interesting result we got.
+
+The design rule we started with a week ago never moved: the language model reasons in words
+and may decline a trade, but a deterministic rulebook picks the strategy and plain Python
+sizes it. The model cannot propose a different trade. Discretion to decline, not to
+substitute.
+
+Most of the drawdown traces to a units error we found and fixed. It is written up in full,
+along with the benchmark result that cuts against us, and every defect we shipped is in the
+graveyard document.
+
+An agent you can audit is worth more than an agent you have to believe.
+
+#BuildInPublic #AITrading #Alpaca #OptionsTrading
+```
